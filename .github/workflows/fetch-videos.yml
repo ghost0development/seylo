@@ -1,0 +1,52 @@
+name: Auto-fetch YouTube videos
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch YouTube RSS
+        run: |
+          curl -s "https://www.youtube.com/feeds/videos.xml?channel_id=UC7BhwAswWJbpApbgbBZxOqA" > feed.xml
+
+      - name: Parse RSS → videos.json
+        run: |
+          python3 << 'EOF'
+          import xml.etree.ElementTree as ET, json
+
+          tree = ET.parse("feed.xml")
+          root = tree.getroot()
+          ns = {'atom': 'http://www.w3.org/2005/Atom', 'yt': 'http://www.youtube.com/xml/schemas/2015'}
+
+          videos = []
+          for entry in root.findall('atom:entry', ns):
+              vid = entry.find('yt:videoId', ns).text
+              title = entry.find('atom:title', ns).text
+              link = entry.find('atom:link', ns).attrib['href']
+              vtype = 'short' if '/shorts/' in link else 'video'
+              videos.append({'id': vid, 'type': vtype})
+
+          with open("videos.json", "w") as f:
+              json.dump(videos, f, indent=2)
+          print(f"Saved {len(videos)} videos")
+          EOF
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name "seylo-bot"
+          git config user.email "bot@seylo.pl"
+          git add videos.json
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "auto: update videos.json"
+            git push
+          fi

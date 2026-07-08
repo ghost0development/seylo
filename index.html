@@ -651,12 +651,8 @@
 
     <script>
       // ===================== CONFIG =====================
-      // YouTube video IDs - wklej nowe ID po wrzuceniu filmu
-      const VIDEO_IDS = [
-        { id: 'gXpXBUxnSfg', type: 'short' },
-        { id: 'IbFwP3iCgLI', type: 'short' },
-        { id: '_Nu4w_4qzhw', type: 'video' },
-      ];
+      // Filmy są auto-pobierane przez GitHub Action z YouTube RSS
+      // Edytuj tylko jak chcesz zmienić kanał Twitch
       const TWITCH_CHANNEL = 'saylo_12';
       // =================================================
 
@@ -700,11 +696,10 @@
       }, { threshold: .08 });
       document.querySelectorAll('.r').forEach(el => ro.observe(el));
 
-      // YouTube oEmbed
+      // YouTube - auto z videos.json (generowany przez GitHub Action)
       const grid = document.getElementById('videoGrid');
-      let loaded = 0;
 
-      VIDEO_IDS.forEach((v) => {
+      function renderVideo(v) {
         const url = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${v.id}&format=json`;
         fetch(url)
           .then(r => r.json())
@@ -731,7 +726,6 @@
             setTimeout(() => { card.classList.add('v'); ro.observe(card); }, 50);
           })
           .catch(() => {
-            // fallback
             const card = document.createElement('a');
             card.href = v.type === 'short' ? `https://www.youtube.com/shorts/${v.id}` : `https://www.youtube.com/watch?v=${v.id}`;
             card.target = '_blank';
@@ -752,7 +746,24 @@
             grid.appendChild(card);
             setTimeout(() => { card.classList.add('v'); ro.observe(card); }, 50);
           });
-      });
+      }
+
+      function renderVideos(list) {
+        grid.innerHTML = '';
+        list.forEach(v => renderVideo(v));
+      }
+
+      fetch('./videos.json')
+        .then(r => { if (!r.ok) throw Error(); return r.json(); })
+        .then(list => renderVideos(list))
+        .catch(() => {
+          // fallback: hardcoded jesli videos.json nie istnieje
+          renderVideos([
+            { id: 'gXpXBUxnSfg', type: 'short' },
+            { id: 'IbFwP3iCgLI', type: 'short' },
+            { id: '_Nu4w_4qzhw', type: 'video' },
+          ]);
+        });
 
       // Twitch live check via Twitch API (public Client-ID)
       const twitchDot = document.getElementById('twitchDot');
