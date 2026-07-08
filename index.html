@@ -3,498 +3,456 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>seyloMMO — MMORPG, recenzje, społeczność</title>
-    <meta name="description" content="Recenzje, poradniki, rankingi i relacje z wirtualnych światów MMORPG. Kanał seyloMMO na YouTube, Twitch i TikTok." />
-    <meta property="og:title" content="seyloMMO — Świat gier MMO" />
-    <meta property="og:description" content="Recenzje, poradniki, rankingi i relacje z największych tytułów MMORPG." />
+    <title>Seylo — WoW Project Ascension & Metin2</title>
+    <meta name="description" content="Seylo gra w WoW Project Ascension i Metin2. Shorty, poradniki i gameplay." />
+    <meta property="og:title" content="Seylo — WoW Ascension & Metin2" />
+    <meta property="og:description" content="World of Warcraft Project Ascension, Metin2 i polski content gamingowy." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔</text></svg>" />
     <style>
       *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
       html{scroll-behavior:smooth}
       body{
         font-family:'Outfit',system-ui,sans-serif;
-        background:#08090c;
-        color:#e8eaf0;
+        background:#07080b;
+        color:#e2e6ed;
         -webkit-font-smoothing:antialiased;
         overflow-x:hidden;
         line-height:1.6
       }
-      ::selection{background:#fb923c;color:#08090c}
-      ::-webkit-scrollbar{width:6px}
-      ::-webkit-scrollbar-track{background:#08090c}
-      ::-webkit-scrollbar-thumb{background:#252a39;border-radius:3px}
-      ::-webkit-scrollbar-thumb:hover{background:#333a4d}
+      ::selection{background:#7c3aed;color:#fff}
+      ::-webkit-scrollbar{width:5px}
+      ::-webkit-scrollbar-track{background:#07080b}
+      ::-webkit-scrollbar-thumb{background:#1e1b2e;border-radius:3px}
 
       a{color:inherit;text-decoration:none}
       img{max-width:100%;display:block}
 
       .mono{font-family:'JetBrains Mono',monospace}
-      .tracking{letter-spacing:.08em;text-transform:uppercase;font-size:.6875rem}
-      .container{width:100%;max-width:1200px;margin:0 auto;padding:0 1.5rem}
+      .container{width:100%;max-width:1120px;margin:0 auto;padding:0 1.5rem}
+
+      /* grain */
+      .grain{
+        position:fixed;inset:0;z-index:999;pointer-events:none;opacity:.025;
+        background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")
+      }
+
+      /* ambient glow */
+      .glow-top-right{
+        position:fixed;top:-20%;right:-10%;z-index:0;
+        width:60vw;height:60vw;border-radius:50%;
+        background:radial-gradient(circle,rgba(124,58,237,.12),transparent 60%);
+        pointer-events:none
+      }
+      .glow-bottom-left{
+        position:fixed;bottom:-20%;left:-10%;z-index:0;
+        width:50vw;height:50vw;border-radius:50%;
+        background:radial-gradient(circle,rgba(6,182,212,.08),transparent 60%);
+        pointer-events:none
+      }
 
       /* nav */
       nav{
-        position:fixed;inset:0 0 auto 0;z-index:50;
-        padding:1rem 0;
-        transition:background .4s,backdrop-filter .4s;
+        position:fixed;inset:0 0 auto 0;z-index:100;
+        padding:.75rem 0;transition:background .4s,backdrop-filter .4s
       }
       nav.scrolled{
-        background:rgba(8,9,12,.8);
-        backdrop-filter:blur(16px);
-        border-bottom:1px solid rgba(255,255,255,.05);
+        background:rgba(7,8,11,.8);backdrop-filter:blur(14px);
+        border-bottom:1px solid rgba(255,255,255,.04)
       }
       nav .inner{
         display:flex;align-items:center;justify-content:space-between;
-        max-width:1200px;margin:0 auto;padding:0 1.5rem;
+        max-width:1120px;margin:0 auto;padding:0 1.5rem
       }
       .logo{
-        display:flex;align-items:center;gap:.75rem;
-        font-weight:700;font-size:1.125rem
+        display:flex;align-items:center;gap:.65rem;font-weight:700;font-size:1.1rem
       }
       .logo-mark{
         display:grid;place-items:center;
         width:2rem;height:2rem;border-radius:6px;
-        background:linear-gradient(135deg,#fb923c,#f97316);
-        color:#08090c;font-size:.75rem;font-weight:800;
+        background:linear-gradient(135deg,#7c3aed,#6d28d9);
+        color:#fff;font-size:.75rem;font-weight:800;
         transition:transform .3s
       }
-      .logo:hover .logo-mark{transform:rotate(12deg)}
-      .logo span{color:#fb923c}
-      nav .links{display:none;gap:2rem}
-      @media(min-width:768px){nav .links{display:flex}}
-      nav .links a{
+      .logo:hover .logo-mark{transform:rotate(8deg) scale(1.05)}
+      .logo span{color:#7c3aed}
+      .links{display:none;gap:2rem}
+      @media(min-width:768px){.links{display:flex}}
+      .links a{
         font-family:'JetBrains Mono',monospace;
-        font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;
-        color:rgba(255,255,255,.5);transition:color .3s;
-        display:flex;align-items:center;gap:.375rem
+        font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;
+        color:rgba(255,255,255,.4);transition:color .3s
       }
-      nav .links a:hover{color:#fff}
-      nav .links a .num{color:#fb923c;font-size:.625rem;opacity:.6}
+      .links a:hover{color:#c4b5fd}
       .nav-cta{
-        display:none;align-items:center;gap:.5rem;
-        padding:.5rem 1rem;border-radius:100px;
-        border:1px solid rgba(255,255,255,.1);
-        font-family:'JetBrains Mono',monospace;
-        font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;
-        color:rgba(255,255,255,.8);transition:border-color .3s,color .3s
+        display:none;align-items:center;gap:.4rem;
+        padding:.4rem 1rem;border-radius:100px;
+        background:linear-gradient(135deg,#7c3aed,#6d28d9);
+        color:#fff;font-family:'JetBrains Mono',monospace;
+        font-size:.625rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+        transition:transform .3s,box-shadow .3s
       }
       @media(min-width:768px){.nav-cta{display:inline-flex}}
-      .nav-cta:hover{border-color:#fb923c;color:#fff}
+      .nav-cta:hover{transform:translateY(-1px);box-shadow:0 8px 24px -6px rgba(124,58,237,.5)}
       .menu-btn{
-        display:grid;place-items:center;
-        width:2.25rem;height:2.25rem;background:none;border:none;color:#fff;cursor:pointer
+        display:grid;place-items:center;width:2.25rem;height:2.25rem;
+        background:none;border:1px solid rgba(255,255,255,.08);border-radius:6px;
+        color:#fff;cursor:pointer
       }
       @media(min-width:768px){.menu-btn{display:none}}
       .mobile-menu{
-        overflow:hidden;transition:max-height .5s,opacity .4s;
-        max-height:0;opacity:0;
-        background:rgba(8,9,12,.95);backdrop-filter:blur(16px);
-        border-bottom:1px solid rgba(255,255,255,.05);
+        overflow:hidden;transition:max-height .4s,opacity .3s;
+        max-height:0;opacity:0;background:rgba(7,8,11,.96);
+        backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.04)
       }
-      .mobile-menu.open{max-height:24rem;opacity:1}
-      .mobile-menu .inner{padding:1rem 1.5rem 1.5rem;display:flex;flex-direction:column;gap:.25rem}
+      .mobile-menu.open{max-height:22rem;opacity:1}
+      .mobile-menu .inner{padding:.75rem 1.5rem 1.25rem;display:flex;flex-direction:column;gap:.25rem}
       .mobile-menu a{
-        display:flex;align-items:center;gap:.75rem;
         padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.04);
-        font-family:'JetBrains Mono',monospace;
-        font-size:.8125rem;letter-spacing:.08em;text-transform:uppercase;
-        color:rgba(255,255,255,.7)
+        font-family:'JetBrains Mono',monospace;font-size:.8125rem;
+        letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6)
       }
-      .mobile-menu a .num{color:#fb923c;opacity:.6}
-      .mobile-menu .btn-ember{justify-content:center;margin-top:.75rem}
+      .mobile-menu a:last-child{border-bottom:none}
+      .mobile-menu .mob-cta{
+        margin-top:.75rem;justify-content:center;display:flex;
+        padding:.65rem 1.25rem;border-radius:100px;
+        background:linear-gradient(135deg,#7c3aed,#6d28d9);color:#fff;
+        font-family:'JetBrains Mono',monospace;font-size:.6875rem;
+        letter-spacing:.08em;text-transform:uppercase;font-weight:600
+      }
 
       /* hero */
       .hero{
         position:relative;min-height:100vh;
         display:flex;align-items:center;overflow:hidden
       }
+      .hero-particles{
+        position:absolute;inset:0;overflow:hidden;z-index:0
+      }
+      .hero-particles span{
+        position:absolute;width:3px;height:3px;
+        background:rgba(124,58,237,.3);border-radius:50%;
+        animation:float linear infinite
+      }
+      @keyframes float{
+        0%{transform:translateY(100vh) rotate(0deg);opacity:0}
+        10%{opacity:1}
+        90%{opacity:1}
+        100%{transform:translateY(-10vh) rotate(360deg);opacity:0}
+      }
       .hero-bg{
         position:absolute;inset:0;object-fit:cover;width:100%;height:100%;
-        filter:saturate(0.7) brightness(0.5)
+        filter:saturate(.6) brightness(.35)
       }
       .hero-overlay{
         position:absolute;inset:0;
-        background:linear-gradient(180deg,rgba(8,9,12,.85) 0%,rgba(8,9,12,.7) 50%,rgba(8,9,12,.95) 100%);
-        background:linear-gradient(90deg,rgba(8,9,12,.9) 0%,rgba(8,9,12,.5) 70%,rgba(8,9,12,.4) 100%);
+        background:linear-gradient(180deg,rgba(7,8,11,.92) 0,rgba(7,8,11,.4) 50%,rgba(7,8,11,.88) 100%);
+        z-index:1
       }
-      .hero .content{position:relative;z-index:2;padding:6rem 1.5rem 4rem;max-width:1200px;margin:0 auto;width:100%}
-      .hero-badge{
+      .hero .content{
+        position:relative;z-index:2;padding:6rem 1.5rem 4rem;
+        max-width:1120px;margin:0 auto;width:100%
+      }
+      .live-badge{
         display:inline-flex;align-items:center;gap:.5rem;
-        margin-bottom:1.5rem;opacity:0;transform:translateY(1rem);
-        animation:fadeUp .8s forwards;
-        font-family:'JetBrains Mono',monospace;font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;
-        color:rgba(255,255,255,.7)
+        margin-bottom:1.5rem;padding:.35rem .85rem;
+        border-radius:100px;border:1px solid rgba(255,255,255,.08);
+        background:rgba(255,255,255,.03);opacity:0;
+        transform:translateY(.75rem);animation:fadeUp .7s forwards
       }
-      .hero-badge .dot{
-        width:.5rem;height:.5rem;border-radius:50%;
-        background:#fb923c;position:relative
+      .live-badge .dot{
+        width:.45rem;height:.45rem;border-radius:50%;background:#22c55e;
+        animation:pulseDot 2s infinite
       }
-      .hero-badge .dot::before{
-        content:'';position:absolute;inset:-3px;border-radius:50%;
-        border:2px solid #fb923c;opacity:.4;animation:pulse 2s infinite
+      @keyframes pulseDot{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.6)}50%{box-shadow:0 0 0 6px rgba(34,197,94,0)}}
+      .live-badge .txt{
+        font-family:'JetBrains Mono',monospace;font-size:.625rem;
+        letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6)
       }
-      @keyframes pulse{0%,100%{transform:scale(1);opacity:.4}50%{transform:scale(1.5);opacity:0}}
+      .live-badge .txt.active{color:#22c55e}
       .hero h1{
-        font-size:clamp(2.5rem,8vw,5.5rem);font-weight:900;line-height:.95;letter-spacing:-.03em;
-        opacity:0;transform:translateY(1.5rem);
-        animation:fadeUp .8s .15s forwards
+        font-size:clamp(2.8rem,9vw,5.5rem);font-weight:900;line-height:.92;
+        letter-spacing:-.03em;opacity:0;transform:translateY(1.5rem);
+        animation:fadeUp .7s .1s forwards
       }
-      .hero h1 .gradient{
-        background:linear-gradient(110deg,#fb923c 0%,#f97316 40%,#2dd4bf 100%);
-        background-size:200% 200%;-webkit-background-clip:text;background-clip:text;
-        -webkit-text-fill-color:transparent;animation:gradientX 8s ease infinite
+      .hero h1 .highlight{
+        background:linear-gradient(135deg,#a78bfa,#7c3aed,#06b6d4);
+        -webkit-background-clip:text;background-clip:text;
+        -webkit-text-fill-color:transparent;
+        background-size:200% 200%;animation:gradientShift 6s ease infinite
       }
-      @keyframes gradientX{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+      @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
       .hero p{
-        margin-top:1.5rem;max-width:32rem;
-        font-size:clamp(1rem,2vw,1.25rem);line-height:1.6;
-        color:rgba(255,255,255,.65);
+        margin-top:1.25rem;max-width:30rem;
+        font-size:clamp(1rem,2vw,1.15rem);line-height:1.6;
+        color:rgba(255,255,255,.55);
         opacity:0;transform:translateY(1rem);
-        animation:fadeUp .8s .3s forwards
+        animation:fadeUp .7s .2s forwards
       }
       .hero-actions{
-        display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem;
+        display:flex;flex-wrap:wrap;gap:.65rem;margin-top:2rem;
         opacity:0;transform:translateY(1rem);
-        animation:fadeUp .8s .45s forwards
+        animation:fadeUp .7s .3s forwards
       }
       .btn-primary{
         display:inline-flex;align-items:center;gap:.5rem;
-        padding:.75rem 1.5rem;border-radius:100px;border:none;cursor:pointer;
-        background:linear-gradient(135deg,#fb923c,#f97316);
-        color:#08090c;font-family:'JetBrains Mono',monospace;
-        font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+        padding:.7rem 1.4rem;border-radius:100px;border:none;cursor:pointer;
+        background:linear-gradient(135deg,#7c3aed,#6d28d9);
+        color:#fff;font-family:'JetBrains Mono',monospace;
+        font-size:.625rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
         transition:transform .3s,box-shadow .3s
       }
-      .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 36px -8px rgba(251,146,60,.5)}
+      .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px -8px rgba(124,58,237,.5)}
       .btn-secondary{
         display:inline-flex;align-items:center;gap:.5rem;
-        padding:.75rem 1.5rem;border-radius:100px;
-        border:1px solid rgba(255,255,255,.1);background:transparent;
-        color:rgba(255,255,255,.7);font-family:'JetBrains Mono',monospace;
-        font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;
+        padding:.7rem 1.4rem;border-radius:100px;
+        border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);
+        color:rgba(255,255,255,.65);font-family:'JetBrains Mono',monospace;
+        font-size:.625rem;letter-spacing:.08em;text-transform:uppercase;
         transition:border-color .3s,color .3s,background .3s
       }
-      .btn-secondary:hover{border-color:rgba(255,255,255,.3);color:#fff;background:rgba(255,255,255,.03)}
+      .btn-secondary:hover{border-color:rgba(255,255,255,.2);color:#fff;background:rgba(255,255,255,.05)}
+      .hero-social{
+        display:flex;flex-wrap:wrap;gap:.4rem;margin-top:2rem;
+        opacity:0;transform:translateY(1rem);
+        animation:fadeUp .7s .4s forwards
+      }
+      .hero-social a{
+        display:flex;align-items:center;gap:.35rem;
+        padding:.4rem .85rem;border-radius:100px;
+        border:1px solid rgba(255,255,255,.06);
+        font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.04em;
+        color:rgba(255,255,255,.5);transition:all .3s
+      }
+      .hero-social a:hover{color:#fff;border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.04)}
+      .hero-social a svg{width:.9rem;height:.9rem}
       @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 
-      /* social bar */
-      .social-bar{
-        display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2.5rem;
-        opacity:0;transform:translateY(1rem);
-        animation:fadeUp .8s .6s forwards
+      /* sections */
+      section{padding:4.5rem 0}
+      @media(min-width:768px){section{padding:6rem 0}}
+      .label{
+        font-family:'JetBrains Mono',monospace;font-size:.625rem;
+        letter-spacing:.12em;text-transform:uppercase;
+        color:#7c3aed;margin-bottom:.75rem
       }
-      .social-bar a{
-        display:flex;align-items:center;gap:.5rem;
-        padding:.5rem 1rem;border-radius:100px;
-        border:1px solid rgba(255,255,255,.08);
-        font-family:'JetBrains Mono',monospace;font-size:.6875rem;
-        letter-spacing:.04em;
-        color:rgba(255,255,255,.6);transition:all .3s
+      .title{
+        font-size:clamp(1.8rem,4.5vw,3rem);font-weight:800;
+        line-height:1.05;letter-spacing:-.02em
       }
-      .social-bar a:hover{color:#fff;border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.04)}
-      .social-bar a svg{width:1rem;height:1rem;flex-shrink:0}
-
-      /* scroll cue */
-      .scroll-cue{
-        position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
-        display:flex;flex-direction:column;align-items:center;gap:.25rem;
-        opacity:0;animation:fadeUp 1s .8s forwards
-      }
-      .scroll-cue span{font-family:'JetBrains Mono',monospace;font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25)}
-      .scroll-line{width:1px;height:2rem;background:linear-gradient(180deg,rgba(255,255,255,.3),transparent)}
-
-      /* sections general */
-      section{padding:5rem 0}
-      @media(min-width:768px){section{padding:7rem 0}}
-      .section-label{
-        font-family:'JetBrains Mono',monospace;
-        font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;
-        color:#fb923c;margin-bottom:1rem
-      }
-      .section-title{
-        font-size:clamp(2rem,5vw,3.5rem);font-weight:800;line-height:1.05;
-        letter-spacing:-.02em
-      }
-      .section-title .dim{color:rgba(255,255,255,.3)}
-
-      /* stats */
-      .stats-grid{
-        display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;
-        border-top:1px solid rgba(255,255,255,.06);
-        border-bottom:1px solid rgba(255,255,255,.06);
-        padding:2.5rem 0
-      }
-      @media(min-width:640px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
-      .stat-item{text-align:center}
-      .stat-item .num{
-        font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1
-      }
-      .stat-item .num .accent{color:#fb923c}
-      .stat-item .label{
-        margin-top:.5rem;font-family:'JetBrains Mono',monospace;
-        font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;
-        color:rgba(255,255,255,.55)
-      }
-      .stat-item .sub{
-        margin-top:.125rem;font-family:'JetBrains Mono',monospace;
-        font-size:.625rem;letter-spacing:.06em;text-transform:uppercase;
-        color:rgba(255,255,255,.25)
+      .title .dim{color:rgba(255,255,255,.25)}
+      .divider{
+        width:100%;height:1px;max-width:1120px;margin:0 auto;
+        background:linear-gradient(90deg,transparent,rgba(124,58,237,.15),transparent)
       }
 
       /* about */
-      .about-grid{display:grid;gap:3rem}
+      .about-grid{display:grid;gap:2.5rem;margin-top:2rem}
       @media(min-width:768px){.about-grid{grid-template-columns:1fr 1fr}}
-      .about-text{font-size:1.0625rem;line-height:1.7;color:rgba(255,255,255,.65)}
-      .about-text .lead{
-        font-size:1.5rem;font-weight:600;line-height:1.3;
-        color:#fff;margin-bottom:1.5rem
+      .about-lead{
+        font-size:1.3rem;font-weight:600;line-height:1.3;color:#fff;
+        margin-bottom:1rem
       }
-      .pillars{display:flex;flex-direction:column;gap:0}
-      .pillar{
-        display:flex;align-items:baseline;gap:1rem;
-        padding:1.25rem 0;border-top:1px solid rgba(255,255,255,.06)
+      .about-lead .accent{color:#7c3aed}
+      .about-p{color:rgba(255,255,255,.55);font-size:.95rem;line-height:1.7}
+      .about-p+.about-p{margin-top:.75rem}
+      .games-list{display:flex;flex-direction:column;gap:.75rem}
+      .game-tag{
+        display:flex;align-items:center;gap:.75rem;
+        padding:1rem 1.25rem;border-radius:.75rem;
+        background:rgba(255,255,255,.02);
+        border:1px solid rgba(255,255,255,.06);
+        transition:all .3s
       }
-      .pillar-num{
-        font-family:'JetBrains Mono',monospace;
-        font-size:.6875rem;color:#fb923c;opacity:.5;width:2rem;flex-shrink:0
+      .game-tag:hover{border-color:rgba(124,58,237,.2);background:rgba(124,58,237,.04);padding-left:1.5rem}
+      .game-tag .icon{
+        width:2rem;height:2rem;border-radius:.5rem;display:grid;place-items:center;
+        font-size:1.1rem;flex-shrink:0
       }
-      .pillar h4{font-weight:600;font-size:1.0625rem}
-      .pillar p{font-size:.875rem;color:rgba(255,255,255,.5);margin-top:.25rem}
+      .game-tag .info{flex:1;min-width:0}
+      .game-tag .info h4{font-weight:600;font-size:.95rem}
+      .game-tag .info p{font-size:.8rem;color:rgba(255,255,255,.4);line-height:1.4}
+      .game-tag .arrow{color:rgba(255,255,255,.15);font-size:.8rem;transition:all .3s}
+      .game-tag:hover .arrow{color:#7c3aed}
 
-      /* featured video */
-      .featured-grid{display:grid;gap:1.5rem}
-      @media(min-width:768px){.featured-grid{grid-template-columns:1.5fr 1fr}}
-      .featured-card{
-        position:relative;border-radius:1rem;overflow:hidden;
-        border:1px solid rgba(255,255,255,.08);
-        aspect-ratio:16/9;display:block
+      /* videos */
+      .video-grid{
+        display:grid;gap:1rem;margin-top:2rem;
+        grid-template-columns:1fr
       }
-      .featured-card img{
+      @media(min-width:480px){.video-grid{grid-template-columns:1fr 1fr}}
+      @media(min-width:768px){.video-grid{grid-template-columns:1fr 1fr 1fr}}
+      .video-card{
+        border-radius:.75rem;overflow:hidden;
+        border:1px solid rgba(255,255,255,.06);
+        background:rgba(255,255,255,.015);
+        transition:all .4s;display:block
+      }
+      .video-card:hover{
+        border-color:rgba(124,58,237,.2);
+        background:rgba(124,58,237,.04);
+        transform:translateY(-3px);
+        box-shadow:0 12px 40px -12px rgba(124,58,237,.2)
+      }
+      .video-card .thumb{
+        position:relative;aspect-ratio:16/9;overflow:hidden;background:#11131a
+      }
+      .video-card .thumb img{
         width:100%;height:100%;object-fit:cover;
-        transition:transform .6s
+        transition:transform .5s
       }
-      .featured-card:hover img{transform:scale(1.05)}
-      .featured-card .overlay{
-        position:absolute;inset:0;
-        background:linear-gradient(180deg,transparent 40%,rgba(8,9,12,.9) 100%)
+      .video-card:hover .thumb img{transform:scale(1.05)}
+      .video-card .thumb .play-overlay{
+        position:absolute;inset:0;display:grid;place-items:center;
+        background:rgba(0,0,0,.3);opacity:0;transition:opacity .3s
       }
-      .featured-card .play-btn{
-        position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-        width:3.5rem;height:3.5rem;border-radius:50%;
-        display:grid;place-items:center;
-        background:rgba(255,255,255,.1);backdrop-filter:blur(8px);
-        border:1px solid rgba(255,255,255,.15);
-        transition:transform .3s
+      .video-card:hover .thumb .play-overlay{opacity:1}
+      .video-card .thumb .play-overlay svg{
+        width:2.5rem;height:2.5rem;color:#fff;
+        filter:drop-shadow(0 4px 12px rgba(0,0,0,.4))
       }
-      .featured-card:hover .play-btn{transform:translate(-50%,-50%) scale(1.1)}
-      .featured-card .meta{position:absolute;bottom:1.25rem;left:1.25rem;right:1.25rem}
-      .featured-card .tag{
-        display:inline-block;padding:.25rem .625rem;border-radius:100px;
-        background:#fb923c;color:#08090c;
-        font-family:'JetBrains Mono',monospace;font-size:.625rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600
+      .video-card .body{padding:.85rem 1rem .95rem}
+      .video-card .body .tag{
+        display:inline-block;padding:.15rem .5rem;border-radius:100px;
+        font-family:'JetBrains Mono',monospace;font-size:.55rem;
+        letter-spacing:.06em;text-transform:uppercase;font-weight:600
       }
-      .featured-card .meta h3{
-        margin-top:.5rem;font-size:1.25rem;font-weight:700;
-        text-shadow:0 2px 20px rgba(0,0,0,.5)
+      .video-card .body .tag.short{background:rgba(124,58,237,.15);color:#a78bfa}
+      .video-card .body .tag.video{background:rgba(6,182,212,.15);color:#67e8f9}
+      .video-card .body h3{
+        margin-top:.5rem;font-size:.9rem;font-weight:600;line-height:1.3;
+        display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden
       }
-      .featured-card .meta .info{
-        margin-top:.25rem;font-family:'JetBrains Mono',monospace;
-        font-size:.6875rem;color:rgba(255,255,255,.6);display:flex;gap:1rem
+      .video-card .body .meta{
+        margin-top:.35rem;font-family:'JetBrains Mono',monospace;
+        font-size:.6rem;color:rgba(255,255,255,.3)
       }
 
-      .video-list{display:flex;flex-direction:column}
-      .video-item{
-        display:flex;align-items:center;gap:1rem;
-        padding:1rem .75rem;border-radius:.5rem;
-        border-bottom:1px solid rgba(255,255,255,.04);
-        transition:background .3s,padding .3s;cursor:pointer
+      /* twitch */
+      .twitch-grid{display:grid;gap:1.5rem;margin-top:2rem}
+      @media(min-width:768px){.twitch-grid{grid-template-columns:1fr 1fr}}
+      .twitch-embed{
+        aspect-ratio:16/9;border-radius:.75rem;overflow:hidden;
+        border:1px solid rgba(255,255,255,.06);background:#0a0b12
       }
-      .video-item:hover,.video-item.active{background:rgba(255,255,255,.03);padding-left:1.5rem}
-      .video-item .idx{
-        font-family:'JetBrains Mono',monospace;
-        font-size:.75rem;color:rgba(255,255,255,.2);width:1.5rem;flex-shrink:0
+      .twitch-embed iframe{width:100%;height:100%;border:none}
+      .twitch-info{
+        display:flex;flex-direction:column;justify-content:center;gap:.75rem
       }
-      .video-item.active .idx{color:#fb923c}
-      .video-item .vtitle{
-        flex:1;min-width:0;font-weight:500;font-size:.9375rem
+      .twitch-status{
+        display:inline-flex;align-items:center;gap:.5rem;
+        padding:.35rem .75rem;border-radius:100px;
+        border:1px solid rgba(255,255,255,.06);font-size:.8rem;width:fit-content
       }
-      .video-item .vtitle .vcat{
-        display:block;font-family:'JetBrains Mono',monospace;
-        font-size:.625rem;letter-spacing:.06em;text-transform:uppercase;
-        color:rgba(255,255,255,.35);margin-top:.125rem
+      .twitch-status .dot{
+        width:.45rem;height:.45rem;border-radius:50%;
+        transition:background .4s
       }
-      .video-item .vmeta{
-        font-family:'JetBrains Mono',monospace;
-        font-size:.625rem;color:rgba(255,255,255,.3);white-space:nowrap;flex-shrink:0
-      }
-      .video-item .arrow{
-        font-size:.75rem;color:rgba(255,255,255,.2);
-        opacity:0;transition:opacity .3s,color .3s
-      }
-      .video-item:hover .arrow,.video-item.active .arrow{opacity:1}
-      .video-item.active .arrow{color:#fb923c}
+      .twitch-status .dot.live{background:#ef4444;animation:pulseDot 2s infinite}
+      .twitch-status .dot.offline{background:#6b7280}
+      .twitch-status .lbl{font-family:'JetBrains Mono',monospace;font-size:.625rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.5)}
 
-      /* social platforms section */
-      .social-section{
-        background:linear-gradient(180deg,transparent,rgba(251,146,60,.04) 50%,transparent)
+      /* social section */
+      .social-grid{
+        display:grid;gap:1rem;margin-top:2rem;
+        grid-template-columns:1fr
       }
-      .platforms-grid{
-        display:grid;grid-template-columns:1fr;gap:1rem
-      }
-      @media(min-width:480px){.platforms-grid{grid-template-columns:1fr 1fr}}
-      @media(min-width:768px){.platforms-grid{grid-template-columns:1fr 1fr 1fr}}
-      .platform-card{
+      @media(min-width:480px){.social-grid{grid-template-columns:1fr 1fr}}
+      @media(min-width:768px){.social-grid{grid-template-columns:1fr 1fr 1fr 1fr}}
+      .social-card{
         display:flex;flex-direction:column;align-items:center;text-align:center;
-        padding:2.5rem 1.5rem;border-radius:1rem;
-        border:1px solid rgba(255,255,255,.08);
+        padding:1.75rem 1rem;border-radius:.75rem;
+        border:1px solid rgba(255,255,255,.06);
+        background:rgba(255,255,255,.012);
         transition:all .4s;position:relative;overflow:hidden
       }
-      .platform-card::before{
+      .social-card::before{
         content:'';position:absolute;inset:0;opacity:0;
         transition:opacity .4s
       }
-      .platform-card.yt::before{background:radial-gradient(circle at 50% 0%,rgba(255,0,0,.08),transparent 70%)}
-      .platform-card.twitch::before{background:radial-gradient(circle at 50% 0%,rgba(145,70,255,.08),transparent 70%)}
-      .platform-card.tt::before{background:radial-gradient(circle at 50% 0%,rgba(255,0,80,.08),transparent 70%)}
-      .platform-card:hover{border-color:rgba(255,255,255,.2);transform:translateY(-4px)}
-      .platform-card:hover::before{opacity:1}
-      .platform-card .icon{width:2.5rem;height:2.5rem;margin-bottom:1rem;position:relative;z-index:1}
-      .platform-card h3{font-size:1.25rem;font-weight:700;position:relative;z-index:1}
-      .platform-card p{
-        font-size:.875rem;color:rgba(255,255,255,.5);
-        margin-top:.5rem;position:relative;z-index:1
+      .social-card.yt::before{background:radial-gradient(circle at 50% 0%,rgba(255,0,0,.06),transparent 70%)}
+      .social-card.tw::before{background:radial-gradient(circle at 50% 0%,rgba(145,70,255,.06),transparent 70%)}
+      .social-card.tt::before{background:radial-gradient(circle at 50% 0%,rgba(255,0,80,.06),transparent 70%)}
+      .social-card.dc::before{background:radial-gradient(circle at 50% 0%,rgba(88,101,242,.06),transparent 70%)}
+      .social-card:hover{border-color:rgba(255,255,255,.15);transform:translateY(-3px)}
+      .social-card:hover::before{opacity:1}
+      .social-card .icon{width:1.75rem;height:1.75rem;margin-bottom:.75rem;position:relative;z-index:1}
+      .social-card h4{font-weight:700;font-size:.95rem;position:relative;z-index:1}
+      .social-card p{
+        font-size:.8rem;color:rgba(255,255,255,.4);
+        margin-top:.35rem;position:relative;z-index:1
       }
-      .platform-card .handle{
-        margin-top:.75rem;font-family:'JetBrains Mono',monospace;
-        font-size:.8125rem;color:rgba(255,255,255,.3);position:relative;z-index:1
+      .social-card .handle{
+        margin-top:.5rem;font-family:'JetBrains Mono',monospace;
+        font-size:.7rem;color:rgba(255,255,255,.25);position:relative;z-index:1
       }
-      .platform-card .btn-link{
-        margin-top:1.25rem;padding:.5rem 1.25rem;border-radius:100px;
-        font-family:'JetBrains Mono',monospace;font-size:.6875rem;
-        letter-spacing:.06em;text-transform:uppercase;font-weight:600;
-        transition:all .3s;position:relative;z-index:1
-      }
-      .platform-card.yt .btn-link{background:#ff0000;color:#fff}
-      .platform-card.yt .btn-link:hover{box-shadow:0 8px 24px -4px rgba(255,0,0,.4)}
-      .platform-card.twitch .btn-link{background:#9147ff;color:#fff}
-      .platform-card.twitch .btn-link:hover{box-shadow:0 8px 24px -4px rgba(145,71,255,.4)}
-      .platform-card.tt .btn-link{background:linear-gradient(135deg,#ff0050,#00f2ea);color:#fff}
-      .platform-card.tt .btn-link:hover{box-shadow:0 8px 24px -4px rgba(255,0,80,.4)}
-
-      /* newsletter */
-      .newsletter{
-        border-radius:1.5rem;overflow:hidden;position:relative;
-        background:linear-gradient(135deg,rgba(251,146,60,.1),rgba(45,212,191,.05))
-      }
-      .newsletter-inner{
-        padding:3rem 2rem;text-align:center;position:relative;
-        border:1px solid rgba(255,255,255,.06);border-radius:1.5rem
-      }
-      .newsletter h2{font-size:clamp(1.5rem,4vw,2.5rem);font-weight:800;line-height:1.1}
-      .newsletter p{color:rgba(255,255,255,.55);margin-top:.75rem;max-width:28rem;margin-left:auto;margin-right:auto}
-      .newsletter form{
-        display:flex;flex-direction:column;gap:.75rem;
-        max-width:28rem;margin:1.5rem auto 0
-      }
-      @media(min-width:480px){.newsletter form{flex-direction:row}}
-      .newsletter input{
-        flex:1;padding:.75rem 1.25rem;border-radius:100px;
-        border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);
-        color:#fff;font-family:'JetBrains Mono',monospace;font-size:.875rem;
-        outline:none;transition:border-color .3s
-      }
-      .newsletter input:focus{border-color:#fb923c}
-      .newsletter input::placeholder{color:rgba(255,255,255,.25)}
-      .newsletter button{
-        padding:.75rem 1.5rem;border-radius:100px;border:none;cursor:pointer;
-        background:linear-gradient(135deg,#fb923c,#f97316);
-        color:#08090c;font-family:'JetBrains Mono',monospace;
-        font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
-        display:inline-flex;align-items:center;gap:.5rem;white-space:nowrap;
-        transition:transform .3s,box-shadow .3s
-      }
-      .newsletter button:hover{transform:translateY(-2px);box-shadow:0 12px 36px -8px rgba(251,146,60,.5)}
 
       /* footer */
       footer{
-        border-top:1px solid rgba(255,255,255,.05);padding:3rem 0 2rem;
-        text-align:center
+        border-top:1px solid rgba(255,255,255,.04);
+        padding:2.5rem 0 2rem;text-align:center
       }
-      footer .brand{font-size:1.125rem;font-weight:700}
-      footer .brand span{color:#fb923c}
-      footer .social-links{
-        display:flex;justify-content:center;gap:1rem;
-        margin:1.25rem 0
+      footer .brand{font-size:1rem;font-weight:700;color:rgba(255,255,255,.8)}
+      footer .brand span{color:#7c3aed}
+      footer .links{
+        display:flex;justify-content:center;gap:.75rem;margin:1rem 0
       }
-      footer .social-links a{
+      footer .links a{
         display:grid;place-items:center;
-        width:2.5rem;height:2.5rem;border-radius:50%;
-        border:1px solid rgba(255,255,255,.08);
+        width:2.25rem;height:2.25rem;border-radius:50%;
+        border:1px solid rgba(255,255,255,.06);
         transition:all .3s
       }
-      footer .social-links a:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.2)}
-      footer .social-links a svg{width:1.125rem;height:1.125rem;color:rgba(255,255,255,.6)}
-      footer .copyright{
-        font-family:'JetBrains Mono',monospace;
-        font-size:.6875rem;color:rgba(255,255,255,.2)
+      footer .links a:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.15)}
+      footer .links a svg{width:1rem;height:1rem;color:rgba(255,255,255,.4)}
+      footer .copy{
+        font-family:'JetBrains Mono',monospace;font-size:.625rem;
+        color:rgba(255,255,255,.15)
       }
 
-      /* reveal animation */
-      .reveal{opacity:0;transform:translateY(2rem);transition:opacity .8s,transform .8s}
-      .reveal.visible{opacity:1;transform:translateY(0)}
-
-      /* grain overlay */
-      .grain{
-        position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.03;
-        background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")
-      }
-
-      /* section divider */
-      .glow-divider{
-        width:100%;height:1px;
-        background:linear-gradient(90deg,transparent,rgba(251,146,60,.2),transparent);
-        margin:0 auto;max-width:1200px
-      }
+      /* reveal */
+      .r{opacity:0;transform:translateY(1.5rem);transition:opacity .7s,transform .7s}
+      .r.v{opacity:1;transform:translateY(0)}
     </style>
   </head>
   <body>
     <div class="grain"></div>
+    <div class="glow-top-right"></div>
+    <div class="glow-bottom-left"></div>
 
     <!-- Nav -->
-    <nav id="navbar">
+    <nav id="nav">
       <div class="inner">
         <a href="#hero" class="logo">
           <span class="logo-mark">S</span>
-          seylo<span>.mmo</span>
+          seylo
         </a>
         <div class="links">
-          <a href="#hero"><span class="num">01</span>Start</a>
-          <a href="#about"><span class="num">02</span>O kanale</a>
-          <a href="#videos"><span class="num">03</span>Filmy</a>
-          <a href="#social"><span class="num">04</span>Społeczność</a>
+          <a href="#about">O mnie</a>
+          <a href="#videos">Filmy</a>
+          <a href="#twitch">Twitch</a>
+          <a href="#social">Social</a>
         </div>
-        <a href="https://www.youtube.com/@seylo-mmo" target="_blank" rel="noreferrer" class="nav-cta">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor"/></svg>
+        <a href="https://www.youtube.com/@seylo-mmo?sub_confirmation=1" target="_blank" rel="noreferrer" class="nav-cta">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#07080b"/></svg>
           Subskrybuj
         </a>
         <button class="menu-btn" id="menuBtn" aria-label="Menu">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
       </div>
       <div class="mobile-menu" id="mobileMenu">
         <div class="inner">
-          <a href="#hero" onclick="toggleMenu()"><span class="num">01</span>Start</a>
-          <a href="#about" onclick="toggleMenu()"><span class="num">02</span>O kanale</a>
-          <a href="#videos" onclick="toggleMenu()"><span class="num">03</span>Filmy</a>
-          <a href="#social" onclick="toggleMenu()"><span class="num">04</span>Społeczność</a>
-          <a href="https://www.youtube.com/@seylo-mmo" target="_blank" rel="noreferrer" class="btn-primary" style="margin-top:.75rem;justify-content:center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor"/></svg>
-            Subskrybuj na YouTube
+          <a href="#about" onclick="closeMenu()">O mnie</a>
+          <a href="#videos" onclick="closeMenu()">Filmy</a>
+          <a href="#twitch" onclick="closeMenu()">Twitch</a>
+          <a href="#social" onclick="closeMenu()">Social</a>
+          <a href="https://www.youtube.com/@seylo-mmo?sub_confirmation=1" target="_blank" rel="noreferrer" class="mob-cta">
+            Subskrybuj YouTube
           </a>
         </div>
       </div>
@@ -502,126 +460,88 @@
 
     <!-- Hero -->
     <section id="hero" class="hero">
+      <div class="hero-particles" id="particles"></div>
       <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="" class="hero-bg" />
       <div class="hero-overlay"></div>
       <div class="content">
-        <div class="hero-badge">
+        <div class="live-badge">
           <span class="dot"></span>
-          Nowy materiał w produkcji
+          <span class="txt">Nowy content w drodze</span>
         </div>
         <h1>
-          Wirtualne światy.<br />
-          <span class="gradient">Prawdziwe emocje.</span>
+          Gram w gry.<br />
+          <span class="highlight">Nagrywam przygody.</span>
         </h1>
         <p>
-          Recenzje, poradniki, rankingi i relacje z największych tytułów MMORPG.
-          Bez korporacyjnego bełkotu — tylko gry, gracze i światy, które warto poznać.
+          World of Warcraft Project Ascension, Metin2 i polski gaming bez ściemy.
+          Shorty, serie i streamy — bo gry to najlepsze historie.
         </p>
         <div class="hero-actions">
-          <a href="https://www.youtube.com/@seylo-mmo" target="_blank" rel="noreferrer" class="btn-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor"/></svg>
-            Subskrybuj kanał
+          <a href="https://www.youtube.com/@seylo-mmo?sub_confirmation=1" target="_blank" rel="noreferrer" class="btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#07080b"/></svg>
+            Subskrybuj
           </a>
           <a href="#videos" class="btn-secondary">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/></svg>
-            Zobacz filmy
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/></svg>
+            Ostatnie filmy
           </a>
         </div>
-        <div class="social-bar">
+        <div class="hero-social">
           <a href="https://www.youtube.com/@seylo-mmo" target="_blank" rel="noreferrer">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor"/></svg>
-            YouTube / @seylo-mmo
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#07080b"/></svg>
+            @seylo-mmo
           </a>
           <a href="https://www.twitch.tv/saylo_12" target="_blank" rel="noreferrer">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.428l-3 3v-3H6.857V1.714h13.714z"/></svg>
-            Twitch / saylo_12
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.428l-3 3v-3H6.857V1.714h13.714z"/></svg>
+            saylo_12
           </a>
           <a href="https://www.tiktok.com/@saylo_shorts" target="_blank" rel="noreferrer">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-            TikTok / saylo_shorts
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            @saylo_shorts
           </a>
         </div>
       </div>
-      <div class="scroll-cue">
-        <span>Przewiń</span>
-        <div class="scroll-line"></div>
-      </div>
     </section>
-
-    <!-- Stats -->
-    <section>
-      <div class="container">
-        <div class="stats-grid reveal">
-          <div class="stat-item">
-            <div class="num"><span id="stat1">0</span><span class="accent">K+</span></div>
-            <div class="label">Subskrybentów</div>
-            <div class="sub">i rośnie</div>
-          </div>
-          <div class="stat-item">
-            <div class="num"><span id="stat2">0</span><span class="accent">K</span></div>
-            <div class="label">Wyświetleń</div>
-            <div class="sub">łącznie</div>
-          </div>
-          <div class="stat-item">
-            <div class="num"><span id="stat3">0</span></div>
-            <div class="label">Filmów</div>
-            <div class="sub">w archiwum</div>
-          </div>
-          <div class="stat-item">
-            <div class="num"><span id="stat4">0</span><span class="accent"> lata</span></div>
-            <div class="label">Na YouTube</div>
-            <div class="sub">od 2023</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="glow-divider"></div>
 
     <!-- About -->
     <section id="about">
       <div class="container">
-        <div class="section-label reveal">01 — O kanale</div>
-        <div class="about-grid">
-          <div class="about-text reveal">
-            <p class="lead">Gracz, dla którego MMO to nie gra — to drugi dom.</p>
-            <p>
-              seyloMMO powstał z pasji do wirtualnych światów. Nie znajdziesz tutaj
-              sponsorowanych recenzji ani klikania w reklamy. Tylko szczere opinie,
-              setki godzin spędzonych w różnych tytułach i prawdziwa społeczność.
+        <div class="label r">O mnie</div>
+        <div class="title r">Seylo <span class="dim">— gracz, streamer,</span> gość z Polski</div>
+        <div class="about-grid" style="margin-top:2rem">
+          <div class="r">
+            <p class="about-lead">Gram w to co lubię <span class="accent">i nagrywam</span>.</p>
+            <p class="about-p">
+              Nazywam się Seylo. Na co dzień wbijam w WoW Project Ascension — 
+              klasyczny World of Warcraft bez klas, gdzie każdy build jest możliwy.
+              Od czasu do czasu wpadam też na Metin2, bo korzenie to korzenie.
             </p>
-            <p style="margin-top:1rem">
-              Od klasyków po najnowsze premiery — każdy film to zaproszenie do
-              wspólnego odkrywania tego, co w MMO najlepsze.
+            <p class="about-p">
+              Znajdziesz tu shorty z zabawnymi momentami, serie gameplayowe 
+              i streamy na Twitchu. Bez filozofii — po prostu granie i dobra energia.
             </p>
           </div>
-          <div class="pillars reveal">
-            <div class="pillar">
-              <span class="pillar-num">01</span>
-              <div>
-                <h4>Recenzje</h4>
-                <p>Szczere, bez uprzedzeń — z naciskiem na rozgrywkę, nie marketing.</p>
+          <div class="r">
+            <div class="games-list">
+              <div class="game-tag">
+                <div class="icon" style="background:rgba(124,58,237,.15)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><circle cx="16" cy="8" r="1.5" fill="#a78bfa"/></svg>
+                </div>
+                <div class="info">
+                  <h4>WoW Project Ascension</h4>
+                  <p>Klasyczny WoW bez klas — każdy może być wszystkim. Gram od 2025.</p>
+                </div>
+                <span class="arrow">&rarr;</span>
               </div>
-            </div>
-            <div class="pillar">
-              <span class="pillar-num">02</span>
-              <div>
-                <h4>Poradniki</h4>
-                <p>Przewodniki, które faktycznie pomagają ruszyć w świat.</p>
-              </div>
-            </div>
-            <div class="pillar">
-              <span class="pillar-num">03</span>
-              <div>
-                <h4>Rankingi</h4>
-                <p>Top listy oparte na godzinach spędzonych w grze.</p>
-              </div>
-            </div>
-            <div class="pillar">
-              <span class="pillar-num">04</span>
-              <div>
-                <h4>Let's Play</h4>
-                <p>Relacje z raidów, grindu i eksploracji — na żywo.</p>
+              <div class="game-tag">
+                <div class="icon" style="background:rgba(6,182,212,.15)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#67e8f9" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <div class="info">
+                  <h4>Metin2</h4>
+                  <p>Kultowy polski MMO. Seria "Od zera do Metinczyka" — powrót do przeszłości.</p>
+                </div>
+                <span class="arrow">&rarr;</span>
               </div>
             </div>
           </div>
@@ -629,89 +549,83 @@
       </div>
     </section>
 
-    <div class="glow-divider"></div>
+    <div class="divider"></div>
 
     <!-- Videos -->
     <section id="videos">
       <div class="container">
-        <div class="section-label reveal">02 — Filmy</div>
-        <div class="section-title reveal">Ostatnie <span class="dim">materiały</span></div>
-        <div class="featured-grid" style="margin-top:2rem">
-          <div class="reveal">
-            <a href="https://www.youtube.com/@seylo-mmo/videos" target="_blank" rel="noreferrer" class="featured-card" id="featuredCard">
-              <img src="https://images.pexels.com/photos/19368648/pexels-photo-19368648.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Najnowszy film" id="featuredImg" />
-              <div class="overlay"></div>
-              <div class="play-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              </div>
-              <div class="meta">
-                <span class="tag" id="featuredTag">Ranking</span>
-                <h3 id="featuredTitle">Top 10 MMORPG, w które warto zagrać w tym roku</h3>
-                <div class="info">
-                  <span id="featuredDuration">18:24</span>
-                  <span id="featuredViews">42K wyświetleń</span>
-                </div>
-              </div>
+        <div class="label r">Filmy</div>
+        <div class="title r">Ostatnie <span class="dim">materiały</span></div>
+        <div class="video-grid" id="videoGrid">
+          <!-- rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Twitch -->
+    <section id="twitch">
+      <div class="container">
+        <div class="label r">Twitch</div>
+        <div class="title r">Na żywo <span class="dim">albo i nie</span></div>
+        <div class="twitch-grid">
+          <div class="twitch-embed r">
+            <iframe src="https://player.twitch.tv/?channel=saylo_12&parent=ghost0development.github.io&muted=true" allowfullscreen></iframe>
+          </div>
+          <div class="twitch-info r">
+            <div class="twitch-status">
+              <span class="dot offline" id="twitchDot"></span>
+              <span class="lbl" id="twitchLabel">Sprawdzam status...</span>
+            </div>
+            <h3 style="font-size:1.3rem;font-weight:700;margin-top:.5rem">
+              saylo_12
+            </h3>
+            <p style="color:rgba(255,255,255,.5);font-size:.9rem;line-height:1.6">
+              Streamy z WoW Project Ascension — raidy areny, open world i durne momenty.
+              Wpadaj na live, jak świeci czerwone.
+            </p>
+            <a href="https://www.twitch.tv/saylo_12" target="_blank" rel="noreferrer" class="btn-primary" style="width:fit-content">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.428l-3 3v-3H6.857V1.714h13.714z"/></svg>
+              Obserwuj na Twitch
             </a>
           </div>
-          <div class="reveal" style="display:flex;flex-direction:column;justify-content:center">
-            <div class="video-list" id="videoList"></div>
-          </div>
         </div>
       </div>
     </section>
 
-    <div class="glow-divider"></div>
+    <div class="divider"></div>
 
-    <!-- Social Platforms -->
-    <section id="social" class="social-section">
+    <!-- Social -->
+    <section id="social">
       <div class="container">
-        <div class="section-label reveal">03 — Społeczność</div>
-        <div class="section-title reveal">Znajdziesz mnie <span class="dim">tutaj</span></div>
-        <div class="platforms-grid" style="margin-top:2.5rem">
-          <a href="https://www.youtube.com/@seylo-mmo" target="_blank" rel="noreferrer" class="platform-card yt reveal">
-            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ff0000"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#08090c"/></svg>
-            <h3>YouTube</h3>
-            <p>Recenzje, rankingi, poradniki i let's playe z MMORPG.</p>
+        <div class="label r">Społeczność</div>
+        <div class="title r">Wszystkie <span class="dim">linki</span></div>
+        <div class="social-grid">
+          <a href="https://www.youtube.com/@seylo-mmo" target="_blank" rel="noreferrer" class="social-card yt r">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ff0000"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#07080b"/></svg>
+            <h4>YouTube</h4>
+            <p>Filmy, shorty i serie gameplayowe</p>
             <span class="handle">@seylo-mmo</span>
-            <span class="btn-link">Subskrybuj</span>
           </a>
-          <a href="https://www.twitch.tv/saylo_12" target="_blank" rel="noreferrer" class="platform-card twitch reveal">
+          <a href="https://www.twitch.tv/saylo_12" target="_blank" rel="noreferrer" class="social-card tw r">
             <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9147ff"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.428l-3 3v-3H6.857V1.714h13.714z"/></svg>
-            <h3>Twitch</h3>
-            <p>Livestreamy z gier MMO, raidów i społecznościowych sesji.</p>
+            <h4>Twitch</h4>
+            <p>Livestreamy z WoW Ascension</p>
             <span class="handle">saylo_12</span>
-            <span class="btn-link">Obserwuj</span>
           </a>
-          <a href="https://www.tiktok.com/@saylo_shorts" target="_blank" rel="noreferrer" class="platform-card tt reveal">
+          <a href="https://www.tiktok.com/@saylo_shorts" target="_blank" rel="noreferrer" class="social-card tt r">
             <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-            <h3>TikTok</h3>
-            <p>Krótkie klipy, ciekawostki i gamingowe skróty.</p>
-            <span class="handle">saylo_shorts</span>
-            <span class="btn-link">Obserwuj</span>
+            <h4>TikTok</h4>
+            <p>Gamingowe shorty i klipy</p>
+            <span class="handle">@saylo_shorts</span>
           </a>
-        </div>
-      </div>
-    </section>
-
-    <div class="glow-divider"></div>
-
-    <!-- Newsletter -->
-    <section>
-      <div class="container">
-        <div class="newsletter reveal">
-          <div class="newsletter-inner">
-            <div class="section-label" style="color:#2dd4bf">04 — Bądź na bieżąco</div>
-            <h2>Dołącz do <span style="background:linear-gradient(110deg,#fb923c,#2dd4bf);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">społeczności</span></h2>
-            <p>Zero spamu. Tylko powiadomienia o nowych filmach i ekskluzywne treści.</p>
-            <form id="newsletterForm">
-              <input type="email" placeholder="twoj@email.com" required />
-              <button type="submit">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                Zapisz się
-              </button>
-            </form>
-          </div>
+          <a href="mailto:kontakt@seylommo.pl" class="social-card dc r">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" color="#e2e6ed"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <h4>E-mail</h4>
+            <p>Kontakt i współpraca</p>
+            <span class="handle">kontakt@seylommo.pl</span>
+          </a>
         </div>
       </div>
     </section>
@@ -719,13 +633,10 @@
     <!-- Footer -->
     <footer>
       <div class="container">
-        <div class="brand">seylo<span>.mmo</span></div>
-        <p style="color:rgba(255,255,255,.4);font-size:.875rem;margin-top:.5rem;max-width:24rem;margin-left:auto;margin-right:auto">
-          Recenzje, poradniki i relacje z wirtualnych światów MMORPG.
-        </p>
-        <div class="social-links">
+        <div class="brand">seylo</div>
+        <div class="links">
           <a href="https://www.youtube.com/@seylo-mmo" target="_blank" rel="noreferrer" aria-label="YouTube">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#08090c"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#07080b"/></svg>
           </a>
           <a href="https://www.twitch.tv/saylo_12" target="_blank" rel="noreferrer" aria-label="Twitch">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.428l-3 3v-3H6.857V1.714h13.714z"/></svg>
@@ -733,148 +644,137 @@
           <a href="https://www.tiktok.com/@saylo_shorts" target="_blank" rel="noreferrer" aria-label="TikTok">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
           </a>
-          <a href="mailto:kontakt@seylommo.pl" aria-label="Email">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          </a>
         </div>
-        <div class="copyright">&copy; 2026 seyloMMO &mdash; Wszelkie prawa zastrzeżone</div>
+        <div class="copy">&copy; 2026 seylo &mdash; gra się nie kończy</div>
       </div>
     </footer>
 
     <script>
-      // Navbar scroll
-      const nav = document.getElementById('navbar');
-      window.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', window.scrollY > 20);
-      });
+      // ===================== CONFIG =====================
+      // YouTube video IDs - wklej nowe ID po wrzuceniu filmu
+      const VIDEO_IDS = [
+        { id: 'gXpXBUxnSfg', type: 'short' },
+        { id: 'IbFwP3iCgLI', type: 'short' },
+        { id: '_Nu4w_4qzhw', type: 'video' },
+      ];
+      const TWITCH_CHANNEL = 'saylo_12';
+      // =================================================
+
+      // Nav scroll
+      const nav = document.getElementById('nav');
+      window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20));
 
       // Mobile menu
       let menuOpen = false;
       const menuBtn = document.getElementById('menuBtn');
       const mobileMenu = document.getElementById('mobileMenu');
-
       menuBtn.addEventListener('click', () => {
         menuOpen = !menuOpen;
         mobileMenu.classList.toggle('open', menuOpen);
         menuBtn.innerHTML = menuOpen
-          ? '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
-          : '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+          ? '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+          : '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
       });
-
-      function toggleMenu() {
+      function closeMenu() {
         menuOpen = false;
         mobileMenu.classList.remove('open');
-        menuBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+        menuBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
       }
 
-      // Counter animation
-      function animateCounter(el, target, suffix) {
-        let current = 0;
-        const step = Math.ceil(target / 60);
-        const timer = setInterval(() => {
-          current += step;
-          if (current >= target) {
-            current = target;
-            clearInterval(timer);
-          }
-          el.textContent = current.toLocaleString();
-        }, 30);
+      // Particles
+      const particleBox = document.getElementById('particles');
+      for (let i = 0; i < 30; i++) {
+        const s = document.createElement('span');
+        s.style.left = Math.random() * 100 + '%';
+        s.style.animationDuration = (15 + Math.random() * 25) + 's';
+        s.style.animationDelay = (Math.random() * 20) + 's';
+        s.style.width = s.style.height = (2 + Math.random() * 3) + 'px';
+        particleBox.appendChild(s);
       }
 
       // Scroll reveal
-      const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            revealObserver.unobserve(entry.target);
-          }
+      const ro = new IntersectionObserver((es) => {
+        es.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('v'); ro.unobserve(e.target); }
         });
-      }, { threshold: 0.1 });
+      }, { threshold: .08 });
+      document.querySelectorAll('.r').forEach(el => ro.observe(el));
 
-      document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+      // YouTube oEmbed
+      const grid = document.getElementById('videoGrid');
+      let loaded = 0;
 
-      // Stats counter on visible
-      const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            animateCounter(document.getElementById('stat1'), 12);
-            animateCounter(document.getElementById('stat2'), 480);
-            animateCounter(document.getElementById('stat3'), 180);
-            animateCounter(document.getElementById('stat4'), 3);
-            statsObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.5 });
-
-      const statsGrid = document.querySelector('.stats-grid');
-      if (statsGrid) statsObserver.observe(statsGrid);
-
-      // Video list data
-      const videos = [
-        { title: 'Top 10 MMORPG, w które warto zagrać w tym roku', category: 'Ranking', duration: '18:24', views: '42K', thumb: 'https://images.pexels.com/photos/19368648/pexels-photo-19368648.jpeg?auto=compress&cs=tinysrgb&w=900' },
-        { title: 'Czy ten nowy MMO zmieni wszystko? — Recenzja', category: 'Recenzja', duration: '12:05', views: '28K', thumb: 'https://images.pexels.com/photos/1743365/pexels-photo-1743365.jpeg?auto=compress&cs=tinysrgb&w=900' },
-        { title: 'Pierwsze kroki w świecie grindu — poradnik', category: 'Poradnik', duration: '25:41', views: '15K', thumb: 'https://images.pexels.com/photos/7915173/pexels-photo-7915173.jpeg?auto=compress&cs=tinysrgb&w=900' },
-        { title: 'Największe zwiastuny MMO ostatniego miesiąca', category: 'Aktualności', duration: '08:12', views: '19K', thumb: 'https://images.pexels.com/photos/167077/pexels-photo-167077.jpeg?auto=compress&cs=tinysrgb&w=900' },
-        { title: 'Hardcore open world — live z bossa', category: "Let's Play", duration: '47:33', views: '33K', thumb: 'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=900' },
-      ];
-
-      const featuredImg = document.getElementById('featuredImg');
-      const featuredTag = document.getElementById('featuredTag');
-      const featuredTitle = document.getElementById('featuredTitle');
-      const featuredDuration = document.getElementById('featuredDuration');
-      const featuredViews = document.getElementById('featuredViews');
-      const videoList = document.getElementById('videoList');
-      let activeIndex = 0;
-
-      function renderVideos() {
-        videoList.innerHTML = '';
-        videos.forEach((v, i) => {
-          const div = document.createElement('div');
-          div.className = `video-item ${i === activeIndex ? 'active' : ''}`;
-          div.innerHTML = `
-            <span class="idx">${String(i + 1).padStart(2, '0')}</span>
-            <div class="vtitle">
-              ${v.title}
-              <span class="vcat">${v.category} &mdash; ${v.duration}</span>
-            </div>
-            <span class="vmeta">${v.views}</span>
-            <span class="arrow">&rarr;</span>
-          `;
-          div.addEventListener('mouseenter', () => setActive(i));
-          div.addEventListener('click', () => {
-            window.open('https://www.youtube.com/@seylo-mmo/videos', '_blank');
+      VIDEO_IDS.forEach((v) => {
+        const url = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${v.id}&format=json`;
+        fetch(url)
+          .then(r => r.json())
+          .then(data => {
+            const card = document.createElement('a');
+            card.href = v.type === 'short' ? `https://www.youtube.com/shorts/${v.id}` : `https://www.youtube.com/watch?v=${v.id}`;
+            card.target = '_blank';
+            card.rel = 'noreferrer';
+            card.className = 'video-card r';
+            card.innerHTML = `
+              <div class="thumb">
+                <img src="https://i4.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="${data.title}" loading="lazy" />
+                <div class="play-overlay">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+              </div>
+              <div class="body">
+                <span class="tag ${v.type}">${v.type === 'short' ? 'Short' : 'Film'}</span>
+                <h3>${data.title}</h3>
+                <div class="meta">${data.author_name || 'Seylo'}</div>
+              </div>
+            `;
+            grid.appendChild(card);
+            setTimeout(() => { card.classList.add('v'); ro.observe(card); }, 50);
+          })
+          .catch(() => {
+            // fallback
+            const card = document.createElement('a');
+            card.href = v.type === 'short' ? `https://www.youtube.com/shorts/${v.id}` : `https://www.youtube.com/watch?v=${v.id}`;
+            card.target = '_blank';
+            card.rel = 'noreferrer';
+            card.className = 'video-card r';
+            card.innerHTML = `
+              <div class="thumb">
+                <img src="https://i4.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="Film" loading="lazy" />
+                <div class="play-overlay">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+              </div>
+              <div class="body">
+                <span class="tag ${v.type}">${v.type === 'short' ? 'Short' : 'Film'}</span>
+                <h3>Obejrzyj na YouTube</h3>
+              </div>
+            `;
+            grid.appendChild(card);
+            setTimeout(() => { card.classList.add('v'); ro.observe(card); }, 50);
           });
-          videoList.appendChild(div);
-        });
-      }
-
-      function setActive(i) {
-        activeIndex = i;
-        const v = videos[i];
-        featuredImg.src = v.thumb;
-        featuredTag.textContent = v.category;
-        featuredTitle.textContent = v.title;
-        featuredDuration.textContent = v.duration;
-        featuredViews.textContent = v.views + ' wyświetleń';
-        document.querySelectorAll('.video-item').forEach((el, idx) => {
-          el.classList.toggle('active', idx === i);
-        });
-      }
-
-      renderVideos();
-
-      // Newsletter
-      document.getElementById('newsletterForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const btn = e.target.querySelector('button');
-        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Zapisano!';
-        btn.style.background = 'linear-gradient(135deg,#2dd4bf,#14b8a6)';
-        setTimeout(() => {
-          btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Zapisz się';
-          btn.style.background = '';
-        }, 3000);
-        e.target.reset();
       });
+
+      // Twitch live check via Twitch API (public Client-ID)
+      const twitchDot = document.getElementById('twitchDot');
+      const twitchLabel = document.getElementById('twitchLabel');
+
+      fetch(`https://api.twitch.tv/helix/streams?user_login=${TWITCH_CHANNEL}`, {
+        headers: { 'Client-ID': 'kimne78kx3ncx6brgo4mv6wki5h1ko' }
+      })
+        .then(r => r.json())
+        .then(d => {
+          if (d.data && d.data.length > 0) {
+            twitchDot.className = 'dot live';
+            twitchLabel.textContent = 'NA ŻYWO — ' + (d.data[0].game_name || 'WoW Ascension').toUpperCase();
+          } else {
+            twitchDot.className = 'dot offline';
+            twitchLabel.textContent = 'OFFLINE — wróć później';
+          }
+        })
+        .catch(() => {
+          twitchDot.className = 'dot offline';
+          twitchLabel.textContent = 'OFFLINE — sprawdź Twitch';
+        });
     </script>
   </body>
 </html>
